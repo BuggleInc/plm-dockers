@@ -1,0 +1,15 @@
+plm:
+  image: plm-webserver
+  ports:
+    - "80:9000"
+  links:
+    - messagequeue:messageq
+
+messagequeue:
+  image: rabbitmq
+
+judge:
+  image: plm-judge
+  restart: always
+  links:
+    - messagequeue:messageq

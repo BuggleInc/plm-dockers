@@ -36,7 +36,7 @@ RUN mkdir /app
 WORKDIR /app
 EXPOSE 9000
 
-RUN [ "git", "clone", "--depth=1", "--branch=master", "https://github.com/BuggleInc/webPLM.git", "/app/webplm" ]
+RUN [ "git", "clone", "--depth=1", "--branch=split", "https://github.com/BuggleInc/webPLM.git", "/app/webplm" ]
 WORKDIR /app/webplm
 RUN ["activator", "stage"] 
 

@@ -10,5 +10,6 @@ messagequeue:
 
 judge:
   image: plm-judge
+  restart: always
   links:
     - messagequeue:messageq

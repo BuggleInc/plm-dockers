@@ -8,7 +8,7 @@ messagequeue:
     - "5672:5672"
     - "15672:15672"
 plm:
-  image: buggleinc/webplm:lastest
+  image: buggleinc/webplm:latest
   volumes:
     - "~/.plm:/root/.plm"
     - "~/webPLM/logs/:/app/webplm-dist/logs"

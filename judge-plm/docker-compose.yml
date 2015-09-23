@@ -1,0 +1,6 @@
+judge:
+  image: buggleinc/plm-judge:latest
+  restart: always
+  environment: 
+    MESSAGEQ_PORT_5672_TCP_ADDR:
+    MESSAGEQ_PORT_5672_TCP_PORT:

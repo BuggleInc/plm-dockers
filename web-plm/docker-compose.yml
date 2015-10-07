@@ -1,7 +1,8 @@
 nginx:
-  image: nginx
+  image: plm-nginx
   ports:
     - "80:80"
+    - "443:443"
 messagequeue:
   image: rabbitmq:3-management
   ports:
@@ -13,7 +14,7 @@ plm:
     - "~/.plm:/root/.plm"
     - "~/webPLM/logs/:/app/webplm-dist/logs"
   ports:
-    - "443:9443"
+    - "9443:9443"
   environment:
     GITHUB_CLIENT_SECRET:
     GOOGLE_CLIENT_SECRET:

@@ -5,7 +5,7 @@
 # -v <version>, --version=<version> : the version of the resulting docker image
 
 # read the options
-TEMP=`getopt -o hb:n:v: --long help,branch:,name:,version: -n 'make.sh' -- "$@"`
+TEMP=`getopt -o hcb:n:v: --long help,clean,branch:,name:,version: -n 'make.sh' -- "$@"`
 
 if [ $? != 0 ] ; then
     echo "Terminating..."
@@ -17,9 +17,10 @@ eval set -- "$TEMP"
 ARG_BRANCH="master"
 ARG_NAME="webplm"
 ARG_VERSION=""
+ARG_CLEAN=false
 
 usage() {
-    echo "$0 [-h | --help] [-b | --branch <branch name>] [-n | --name <docker image name>] [-v | --version <version name>]"
+    echo "$0 [-h | --help] [-c | --clean] [-b | --branch <branch name>] [-n | --name <docker image name>] [-v | --version <version name>]"
 }
 
 while true ; do
@@ -27,6 +28,8 @@ while true ; do
         -h|--help)
             usage
             exit 0 ;;
+        -c|--clean)
+            ARG_CLEAN=true ; shift ;;
         -b|--branch)
             case "$2" in
                 *) ARG_BRANCH=$2 ; shift 2 ;;
@@ -54,3 +57,9 @@ docker run -v ~/.ivy2:/root/.ivy2 \
            play-webplm stage
 
 docker build -t "$ARG_NAME$ARG_VERSION" .
+
+if [ "$ARG_CLEAN" = true ]; then
+    # sudo is needed to clean since the root user from the docker container wrote the files
+    # TODO: Find a way to not have to use sudo
+    sudo rm -rf target/
+fi

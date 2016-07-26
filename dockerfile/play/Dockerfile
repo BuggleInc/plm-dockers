@@ -17,14 +17,14 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 RUN curl -O http://downloads.typesafe.com/scala/2.11.7/scala-2.11.7.tgz && \
     tar xvfz scala-2.11.7.tgz -C / && \
-	rm scala-2.11.7.tgz
+    rm scala-2.11.7.tgz
 ENV SCALA_HOME /scala-2.11.7
 ENV PATH $PATH:$SCALA_HOME/bin
 
 RUN curl -O http://downloads.typesafe.com/typesafe-activator/1.3.5/typesafe-activator-1.3.5-minimal.zip && \
     unzip typesafe-activator-1.3.5-minimal.zip -d / && \
-	rm typesafe-activator-1.3.5-minimal.zip && \
-	chmod a+x /activator-1.3.5-minimal/activator
+    rm typesafe-activator-1.3.5-minimal.zip && \
+    chmod a+x /activator-1.3.5-minimal/activator
 ENV PATH $PATH:/activator-1.3.5-minimal
 
 # Get sources

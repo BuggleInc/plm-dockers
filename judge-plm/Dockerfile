@@ -1,5 +1,9 @@
-from java:8
-RUN [ "git", "clone", "--depth=1", "--branch=master", "https://github.com/BuggleInc/PLM-Judge.git", "app/webPLM_Worker"]
-WORKDIR app/webPLM_Worker
-run javac -classpath src/:lib/plm-2.6-pre-20150202.jar:lib/commons-cli-1.1.jar:lib/commons-io-1.2.jar:lib/rabbitmq-client.jar  src/server/Main.java
-CMD ["java", "-cp", "src:lib/*", "server.Main"]
+FROM java:8
+MAINTAINER Gerald Oster <oster@loria.fr>
+
+RUN ["mkdir", "-p", "/app/judge"]
+
+COPY ["/target/PLM-judge-assembly-1.0-SNAPSHOT.jar", "/app/judge/PLM-judge.jar"]
+
+WORKDIR /app/judge
+CMD ["java", "-jar", "PLM-judge.jar"]

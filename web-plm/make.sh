@@ -62,7 +62,7 @@ while true ; do
     esac
 done
 
-if [ -n ARG_VERSION ]; then
+if [ -n "$ARG_VERSION" ]; then
     DOCKER_IMAGE_FULLNAME="$ARG_NAME:$ARG_VERSION"
 else
     DOCKER_IMAGE_FULLNAME="$ARG_NAME"

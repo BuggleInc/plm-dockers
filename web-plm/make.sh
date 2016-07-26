@@ -25,6 +25,9 @@ ARG_VERSION=""
 ARG_NO_CACHE=false
 ARG_CLEAN=false
 
+# One-liner to get the full directory name of the script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 usage() {
     echo "$0 [-h | --help] [-c | --clean] [--no-cache] [-r | --repository <repository name>] [-b | --branch <branch name>] [-n | --name <docker image name>] [-v | --version <version name>]"
 }
@@ -80,7 +83,7 @@ else
 fi
 
 docker run -v ~/.ivy2:/root/.ivy2 \
-           -v `pwd`/target:/app/target \
+           -v "$DIR/target:/app/target" \
            play-webplm stage
 
 docker build -t "$DOCKER_IMAGE_FULLNAME" .
@@ -88,5 +91,5 @@ docker build -t "$DOCKER_IMAGE_FULLNAME" .
 if [ "$ARG_CLEAN" = true ]; then
     # sudo is needed to clean since the generated binaries belong to the root user from the docker container
     # TODO: Find a workaround to not have to use sudo
-    sudo rm -rf target/
+    sudo rm -rf "$DIR/target"
 fi

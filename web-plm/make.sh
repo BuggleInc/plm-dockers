@@ -86,10 +86,16 @@ docker run -v ~/.ivy2:/root/.ivy2 \
            -v "$DIR/target:/app/target" \
            play-webplm stage
 
+echo "Binaries of webPLM are available in $DIR/target/"
+
 docker build -t "$DOCKER_IMAGE_FULLNAME" .
 
 if [ "$ARG_CLEAN" = true ]; then
+    echo "Deleting directory $DIR/target/..."
     # sudo is needed to clean since the generated binaries belong to the root user from the docker container
     # TODO: Find a workaround to not have to use sudo
     sudo rm -rf "$DIR/target"
+    echo "$DIR/target/ deleted."
 fi
+
+echo "Docker image $DOCKER_IMAGE_FULLNAME has been successfully built."

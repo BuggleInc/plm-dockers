@@ -8,12 +8,21 @@
 # -n | --name <docker image name> : the name of the resulting docker image
 # -v | --version <docker image version> : the version of the resulting docker image
 
-# read the options
-TEMP=`getopt -o hcr:b:n:v: --long help,clean,no-cache,repository:branch:,name:,version: -n 'make.sh' -- "$@"`
 
-if [ $? != 0 ] ; then
+usage() {
+    echo "$0 [-h | --help] [-c | --clean] [--no-cache] [-r | --repository <repository name>] [-b | --branch <branch name>] [--bin <path to binaries>] [-n | --name <docker image name>] [-v | --version <version name>]"
+}
+
+terminating() {
     echo "Terminating..."
     exit 1
+
+}
+# read the options
+TEMP=`getopt -o hcr:b:n:v: --long help,clean,no-cache,repository:branch:,bin:,name:,version: -n 'make.sh' -- "$@"`
+
+if [ $? != 0 ] ; then
+    terminating
 fi
 
 eval set -- "$TEMP"
@@ -27,10 +36,6 @@ ARG_CLEAN=false
 
 # One-liner to get the full directory name of the script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-usage() {
-    echo "$0 [-h | --help] [-c | --clean] [--no-cache] [-r | --repository <repository name>] [-b | --branch <branch name>] [-n | --name <docker image name>] [-v | --version <version name>]"
-}
 
 while true ; do
     case "$1" in
@@ -68,27 +73,37 @@ else
     DOCKER_IMAGE_FULLNAME="$ARG_NAME"
 fi
 
-# TODO: Factorize this code
-if [ "$ARG_NO_CACHE" = true ]; then
-    docker build --build-arg "REPOSITORY=$ARG_REPOSITORY" \
-                 --build-arg "BRANCH=$ARG_BRANCH" \
-                 --no-cache \
-                 -t play-webplm \
-                 github.com/BuggleInc/plm-dockers.git#update:play
-else
-    docker build --build-arg "REPOSITORY=$ARG_REPOSITORY" \
-                 --build-arg "BRANCH=$ARG_BRANCH" \
-                 -t play-webplm \
-                 github.com/BuggleInc/plm-dockers.git#update:play
+echo "Generating docker image to build the project available here: $ARG_REPOSITORY"
+echo "The current branch is $ARG_BRANCH"
+
+docker build --build-arg "REPOSITORY=$ARG_REPOSITORY" \
+             --build-arg "BRANCH=$ARG_BRANCH" \
+             "--no-cache=$ARG_NO_CACHE" \
+             -t play-webplm \
+             github.com/BuggleInc/plm-dockers.git#update:dockerfile/play
+
+if [ $? -eq 1 ]; then
+    echo "An error occurred while generating the docker image to build the project."
+    terminating
 fi
 
 docker run -v ~/.ivy2:/root/.ivy2 \
            -v "$DIR/target:/app/target" \
-           play-webplm stage
+           --rm play-webplm stage
+
+if [ $? -eq 1 ]; then
+    echo "An error occurred while building the project."
+    terminating
+fi
 
 echo "Binaries of webPLM are available in $DIR/target/"
 
 docker build -t "$DOCKER_IMAGE_FULLNAME" .
+
+if [ $? -eq 1 ]; then
+    echo "An error occurred while generating the docker image to run the project."
+    terminating
+fi
 
 if [ "$ARG_CLEAN" = true ]; then
     echo "Deleting directory $DIR/target/..."

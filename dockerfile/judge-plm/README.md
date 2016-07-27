@@ -10,14 +10,15 @@ To build the judge docker image, you can use the available script ```make.sh```.
           [--no-cache]
           [-r | --repository <repository name>]
           [-b | --branch <branch name>]
+          [--bin <path to binaries>]
           [-n | --name <docker image name>]
           [-v | --version <docker image version>]
 ```
 
 Then, you can use the following command line to run the container:
 ```
-docker run -e "MESSAGEQ_PORT_5672_TCP_ADDR=<URL of message queue service>"
-           -e "MESSAGEQ_PORT_5672_TCP_PORT=<port of message queue service"
+docker run -e "MESSAGEQUEUE_ADDR=<URL of message queue service>"
+           -e "MESSAGEQUEUE_PORT=<port of message queue service"
            -d <name of your image>
 ````
 
@@ -28,6 +29,13 @@ The judge application should be running and waiting for an execution request thr
 When building the judge docker image, the JAR of PLM-judge is expected to be found inside the subdirectory ```target/```.
 
 To get this JAR, you can either build the application using [Play Framework docker image](https://github.com/BuggleInc/plm-dockers/tree/update/play) or the command ```activator assembly``` if you setup the development environment.
+
+In the later case, you can then build the web-plm docker image with this command:
+
+```
+./make.sh --bin /path/to/binaries
+```
+
 
 Then you can use the following command line to build the docker image:
 ```

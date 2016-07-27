@@ -10,6 +10,7 @@ To build the web-plm docker image, you can use the available script ```make.sh``
           [--no-cache]
           [-r | --repository <repository name>]
           [-b | --branch <branch name>]
+          [--bin <path to binaries>]
           [-n | --name <docker image name>]
           [-v | --version <docker image version>]
 ```
@@ -26,6 +27,12 @@ The PLM web application should be available from your docker host at the port 80
 When building the web-plm docker image, the binaries of web-plm are expected to be found inside the subdirectory ```target/```.
 
 To get these binaries, you can either build the application using [Play Framework docker image](https://github.com/BuggleInc/plm-dockers/tree/update/play) or the command ```activator stage``` if you setup the development environment.
+
+In the later case, you can then build the web-plm docker image with this command:
+
+```
+./make.sh --bin /path/to/binaries
+```
 
 Then you can use the following command line to build the docker image:
 ```

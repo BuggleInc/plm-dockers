@@ -5,6 +5,7 @@
 # --no-cache : flag to build the docker image to generate the binaries using the option --no-cache
 # -r | --repository <repository name> : the git repository to clone
 # -b | --branch <branch name> : the branch of the repository to checkout
+# --bin <path to binaries> : the path to the binaries of webPLM if you already have them
 # -n | --name <docker image name> : the name of the resulting docker image
 # -v | --version <docker image version> : the version of the resulting docker image
 
@@ -33,6 +34,7 @@ ARG_NAME="webplm"
 ARG_VERSION=""
 ARG_NO_CACHE=false
 ARG_CLEAN=false
+ARG_BIN=""
 
 # One-liner to get the full directory name of the script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -54,6 +56,10 @@ while true ; do
             case "$2" in
                 *) ARG_BRANCH=$2 ; shift 2 ;;
             esac ;;
+        --bin)
+            case "$2" in
+                *) ARG_BIN=$2 ; shift 2 ;;
+            esac ;;
         -n|--name)
             case "$2" in
                 *) ARG_NAME=$2 ; shift 2 ;;
@@ -73,27 +79,41 @@ else
     DOCKER_IMAGE_FULLNAME="$ARG_NAME"
 fi
 
-echo "Generating docker image to build the project available here: $ARG_REPOSITORY"
-echo "The current branch is $ARG_BRANCH"
+if [ -n "$ARG_BIN" ]; then
 
-docker build --build-arg "REPOSITORY=$ARG_REPOSITORY" \
-             --build-arg "BRANCH=$ARG_BRANCH" \
-             "--no-cache=$ARG_NO_CACHE" \
-             -t play-webplm \
-             github.com/BuggleInc/plm-dockers.git#update:dockerfile/play
+    # We already have the binaries
+    cp -r "$ARG_BIN" "$DIR/"
 
-if [ $? -eq 1 ]; then
-    echo "An error occurred while generating the docker image to build the project."
-    terminating
-fi
+    if [ $? -eq 1 ]; then
+        echo "An error occurred while copying the binaries."
+        terminating
+    fi
 
-docker run -v ~/.ivy2:/root/.ivy2 \
-           -v "$DIR/target:/app/target" \
-           --rm play-webplm stage
+else
 
-if [ $? -eq 1 ]; then
-    echo "An error occurred while building the project."
-    terminating
+    echo "Generating docker image to build the project available here: $ARG_REPOSITORY"
+    echo "The current branch is $ARG_BRANCH"
+
+    docker build --build-arg "REPOSITORY=$ARG_REPOSITORY" \
+                 --build-arg "BRANCH=$ARG_BRANCH" \
+                 "--no-cache=$ARG_NO_CACHE" \
+                 -t play-webplm \
+                 github.com/BuggleInc/plm-dockers.git#update:dockerfile/play
+
+    if [ $? -eq 1 ]; then
+        echo "An error occurred while generating the docker image to build the project."
+        terminating
+    fi
+
+    docker run -v ~/.ivy2:/root/.ivy2 \
+               -v "$DIR/target:/app/target" \
+               --rm play-webplm stage
+
+    if [ $? -eq 1 ]; then
+        echo "An error occurred while building the project."
+        terminating
+    fi
+
 fi
 
 echo "Binaries of webPLM are available in $DIR/target/"

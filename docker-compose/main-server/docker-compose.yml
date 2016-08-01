@@ -1,0 +1,55 @@
+version: '2'
+services:
+  nginx:
+    image: plm-nginx
+    volumes:
+      - "~/webPLM/ssl:/etc/nginx/ssl"
+    ports:
+      - "80:80"
+      - "443:443"
+  messagequeue:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  plm:
+    image: webplm:2.0-rc2
+    volumes:
+      - "~/webPLM/PLM-data:/root/.plm"
+      - "~/webPLM/logs/:/app/webplm/logs"
+    ports:
+      - "9443:9443"
+    environment:
+      GITHUB_ACCESS_TOKEN:
+      PLM_EXECUTION_MODE: "TRIBUNAL"
+      MESSAGEQUEUE_ADDR: "messagequeue"
+      MESSAGEQUEUE_PORT: "5672"
+      PLM_OAUTH_REDIRECT_URL:
+      PLM_FACEBOOK_OAUTH_REDIRECT_URL:
+      PLM_PLMACCOUNTS_OAUTH_REDIRECT_URL:
+      GITHUB_CLIENT_ID:
+      GITHUB_CLIENT_SECRET:
+      PLMACCOUNTS_CLIENT_ID:
+      PLMACCOUNTS_CLIENT_SECRET:
+    links:
+      - accounts
+      - profiles
+      - messagequeue
+  accounts:
+    image: plm-accounts
+    ports:
+      - "9000:3000"
+    links:
+      - db
+  profiles:
+    image: plm-profiles
+    ports:
+      - "8080:3000"
+    links:
+      - db
+  db:
+    image: mongo
+    volumes:
+      - "~/mongodb/data:/data/db"
+    ports:
+      - "27017:27017"

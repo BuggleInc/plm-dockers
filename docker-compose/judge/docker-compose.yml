@@ -1,0 +1,8 @@
+version: '2'
+services:
+  judge:
+    image: judge:2.0-rc1
+    environment:
+      MESSAGEQUEUE_ADDR:
+      MESSAGEQUEUE_PORT:
+    restart: "always"

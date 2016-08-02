@@ -6,3 +6,5 @@ services:
       MESSAGEQUEUE_ADDR:
       MESSAGEQUEUE_PORT:
     restart: "always"
+    mem_limit: "512M"
+    memswap_limit: "768M"

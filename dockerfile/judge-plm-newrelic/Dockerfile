@@ -1,0 +1,6 @@
+FROM judge:2.0-rc1
+MAINTAINER Gerald Oster <oster@loria.fr>
+
+VOLUME /app/judge/newrelic
+
+CMD ["java", "-jar", "-javaagent:newrelic/newrelic.jar", "PLM-judge.jar"]

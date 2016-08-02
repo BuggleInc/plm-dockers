@@ -7,11 +7,13 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    cpu_shares: 1024
   messagequeue:
     image: rabbitmq:3-management
     ports:
       - "5672:5672"
       - "15672:15672"
+    cpu_shares: 1024
   plm:
     image: webplm:2.0-rc2
     volumes:
@@ -35,21 +37,25 @@ services:
       - accounts
       - profiles
       - messagequeue
+    cpu_shares: 2048
   accounts:
     image: plm-accounts
     ports:
       - "9000:3000"
     links:
       - db
+    cpu_shares: 512
   profiles:
     image: plm-profiles
     ports:
       - "8080:3000"
     links:
       - db
+    cpu_shares: 512
   db:
     image: mongo
     volumes:
       - "~/mongodb/data:/data/db"
     ports:
       - "27017:27017"
+    cpu_shares: 1024

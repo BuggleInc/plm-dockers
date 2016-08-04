@@ -30,7 +30,7 @@ eval set -- "$TEMP"
 
 ARG_REPOSITORY="github.com/BuggleInc/PLM-judge.git"
 ARG_BRANCH="master"
-ARG_NAME="judge"
+ARG_NAME="plm-judge"
 ARG_VERSION=""
 ARG_NO_CACHE=false
 ARG_CLEAN=false

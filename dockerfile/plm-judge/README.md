@@ -39,5 +39,5 @@ In the later case, you can then build the web-plm docker image with this command
 
 Then you can use the following command line to build the docker image:
 ```
-docker build -t <name of your image> github.com/BuggleInc/plm-dockers.git#update:judge-plm
+docker build -t <name of your image> github.com/BuggleInc/plm-dockers.git#update:plm-judge
 ```

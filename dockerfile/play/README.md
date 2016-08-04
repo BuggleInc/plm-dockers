@@ -23,5 +23,5 @@ docker run -v path/to/.ivy2:/root/.ivy2
 ```
 
 Two volumes are necessary:
-- The first one allow to cache sbt and Play dependencies.
+- The first one allows to cache sbt and Play dependencies.
 - The second will contain your application's binaries.

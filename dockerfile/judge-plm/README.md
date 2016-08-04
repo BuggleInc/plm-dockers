@@ -28,7 +28,7 @@ The judge application should be running and waiting for an execution request thr
 
 When building the judge docker image, the JAR of PLM-judge is expected to be found inside the subdirectory ```target/```.
 
-To get this JAR, you can either build the application using [Play Framework docker image](https://github.com/BuggleInc/plm-dockers/tree/update/play) or the command ```activator assembly``` if you setup the development environment.
+To get this JAR, you can either build the application using [Play Framework docker image](https://github.com/BuggleInc/plm-dockers/tree/update/dockerfile/play) or the command ```activator assembly``` if you setup the development environment.
 
 In the later case, you can then build the web-plm docker image with this command:
 

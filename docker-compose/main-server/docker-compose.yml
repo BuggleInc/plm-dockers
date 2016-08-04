@@ -1,7 +1,7 @@
 version: '2'
 services:
   nginx:
-    image: plm-nginx
+    image: buggleinc/plm-nginx:1.0
     volumes:
       - "~/webPLM/ssl:/etc/nginx/ssl"
     ports:
@@ -15,10 +15,11 @@ services:
       - "15672:15672"
     cpu_shares: 1024
   plm:
-    image: webplm:2.0-rc2
+    image: buggleinc/webplm:2.0-rc3-newrelic
     volumes:
       - "~/webPLM/PLM-data:/root/.plm"
-      - "~/webPLM/logs/:/app/webplm/logs"
+      - "~/webPLM/logs:/app/webplm/logs"
+      - "~/webPLM/newrelic:/app/webplm/newrelic"
     ports:
       - "9443:9443"
     environment:
@@ -39,16 +40,20 @@ services:
       - messagequeue
     cpu_shares: 2048
   accounts:
-    image: plm-accounts
+    image: plm-accounts:1.1
     ports:
       - "9000:3000"
+    environment:
+      DB_ADDR: "db"
     links:
       - db
     cpu_shares: 512
   profiles:
-    image: plm-profiles
+    image: plm-profiles:1.1
     ports:
       - "8080:3000"
+    environment:
+      DB_ADDR: "db"
     links:
       - db
     cpu_shares: 512

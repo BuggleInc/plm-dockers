@@ -1,10 +1,13 @@
 version: '2'
 services:
   judge:
-    image: judge:2.0-rc1
+    image: buggleinc/plm-judge:2.0-rc2-newrelic
     environment:
       MESSAGEQUEUE_ADDR:
       MESSAGEQUEUE_PORT:
+    volumes:
+      - "~/PLM-judge/newrelic:/app/judge/newrelic"
     restart: "always"
     mem_limit: "512M"
     memswap_limit: "768M"
+

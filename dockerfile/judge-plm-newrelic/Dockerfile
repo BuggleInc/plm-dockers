@@ -1,4 +1,4 @@
-FROM judge:2.0-rc1
+FROM buggleinc/plm-judge:2.0-rc2
 MAINTAINER Gerald Oster <oster@loria.fr>
 
 VOLUME /app/judge/newrelic

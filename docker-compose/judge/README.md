@@ -1,6 +1,6 @@
 # docker-compose for judges
 
-The goal of this *docker-compose* file is to deploy easily new instances of [PLM-judge](https://github.com/buggleinc/plm-judge) using **Docker**
+The goal of this *docker-compose* file is to deploy easily new instances of [PLM-judge](https://github.com/buggleinc/plm-judge) using **Docker**.
 
 ## Usage
 

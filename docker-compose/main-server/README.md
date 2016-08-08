@@ -1,6 +1,6 @@
 # docker-compose for the main-server
 
-The goal of this *docker-compose* file is to deploy several components for setting up the main server of [webPLM](https://github.com/BuggleInc/webPLM) using **Docker**
+The goal of this *docker-compose* file is to deploy several components for setting up the main server of [webPLM](https://github.com/BuggleInc/webPLM) using **Docker**.
 
 ## Usage
 
@@ -24,8 +24,4 @@ Then, deploy all the components with the following command:
 docker-compose up
 ```
 
-Finally, if you want to start more judges, use this command:
-
-```
-docker-compose scale judge=<number of judges wanted>
-```
+You also need several instances of [PLM-judge](https://github.com/buggleinc/plm-judge) to be able to process the users' execution requests. To deploy them, please [take a look at this documentation](https://github.com/BuggleInc/plm-dockers/tree/update/docker-compose/judge).

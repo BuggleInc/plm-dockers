@@ -15,7 +15,7 @@ docker run -p 80:80
            -p 443:443
            -v path/to/ssl/certificates:/etc/nginx/ssl
            -d <name of your image>
-````
+```
 
 The volume should contain two SSL certificates and the corresponding keys:
 - *webPLM.crt* and *webPLM.key*

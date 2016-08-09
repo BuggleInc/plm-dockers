@@ -17,10 +17,12 @@ To build the webPLM docker image, you can use the available script ```make.sh```
 
 Then, you can use the following command line to run the container:
 ```
-docker run -d -p 8080:9000 <name of your image>
+docker run -p 80:9000
+           -p 443:9443
+           <name of your image>
 ```
 
-The PLM web application should be available from your docker host at the port 8080.
+The PLM web application should be available from your docker host using either HTTP or HTTPS.
 
 ## More in details
 

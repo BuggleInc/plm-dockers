@@ -20,7 +20,7 @@ Then, you can use the following command line to run the container:
 docker run -e "MESSAGEQUEUE_ADDR=<URL of message queue service>"
            -e "MESSAGEQUEUE_PORT=<port of message queue service"
            -d <name of your image>
-````
+```
 
 The judge application should be running and waiting for an execution request through the message queue.
 
@@ -34,10 +34,4 @@ In the later case, you can then build the web-plm docker image with this command
 
 ```
 ./make.sh --bin /path/to/binaries
-```
-
-
-Then you can use the following command line to build the docker image:
-```
-docker build -t <name of your image> github.com/BuggleInc/plm-dockers.git#update:plm-judge
 ```

@@ -18,7 +18,7 @@ To build the web-plm docker image, you can use the available script ```make.sh``
 Then, you can use the following command line to run the container:
 ```
 docker run -d -p 8080:9000 <name of your image>
-````
+```
 
 The PLM web application should be available from your docker host at the port 8080.
 
@@ -32,9 +32,4 @@ In the later case, you can then build the web-plm docker image with this command
 
 ```
 ./make.sh --bin /path/to/binaries
-```
-
-Then you can use the following command line to build the docker image:
-```
-docker build -t <name of your image> github.com/BuggleInc/plm-dockers.git#update:web-plm
 ```

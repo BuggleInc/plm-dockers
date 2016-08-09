@@ -1,4 +1,4 @@
-# Dockerfile for NGINX
+# Dockerfile for plm-nginx
 
 This Dockerfile could be used to build a custom NGINX docker image.
 The NGINX configuration used is available [here](https://github.com/BuggleInc/PLM-nginx).

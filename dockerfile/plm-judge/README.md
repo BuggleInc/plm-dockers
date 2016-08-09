@@ -1,8 +1,8 @@
-# Dockerfile for judge-plm
+# Dockerfile for plm-judge
 
 This Dockerfile could be used to build a docker image based on java:8 for [PLM-judge](https://github.com/BuggleInc/PLM-judge) application.
 
-To build the judge docker image, you can use the available script ```make.sh```.
+To build the PLM-judge docker image, you can use the available script ```make.sh```.
 
 ```
 ./make.sh [-h | --help]
@@ -22,11 +22,11 @@ docker run -e "MESSAGEQUEUE_ADDR=<URL of message queue service>"
            -d <name of your image>
 ```
 
-The judge application should be running and waiting for an execution request through the message queue.
+The PLM-judge application should be running and waiting for an execution request through the message queue.
 
 ## More in details
 
-When building the judge docker image, the JAR of PLM-judge is expected to be found inside the subdirectory ```target/```.
+When building the PLM-judge docker image, the JAR of PLM-judge is expected to be found inside the subdirectory ```target/```.
 
 To get this JAR, you can either build the application using [Play Framework docker image](https://github.com/BuggleInc/plm-dockers/tree/update/dockerfile/play) or the command ```activator assembly``` if you setup the development environment.
 

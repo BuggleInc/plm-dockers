@@ -1,8 +1,8 @@
-# Dockerfile for web-plm
+# Dockerfile for webplm
 
 This Dockerfile could be used to build a docker image based on debian:jessie for [webPLM](https://github.com/BuggleInc/webPLM) application.
 
-To build the web-plm docker image, you can use the available script ```make.sh```.
+To build the webPLM docker image, you can use the available script ```make.sh```.
 
 ```
 ./make.sh [-h | --help]
@@ -24,11 +24,11 @@ The PLM web application should be available from your docker host at the port 80
 
 ## More in details
 
-When building the web-plm docker image, the binaries of web-plm are expected to be found inside the subdirectory ```target/```.
+When building the webPLM docker image, the binaries of webPLM are expected to be found inside the subdirectory ```target/```.
 
 To get these binaries, you can either build the application using [Play Framework docker image](https://github.com/BuggleInc/plm-dockers/tree/update/dockerfile/play) or the command ```activator stage``` if you setup the development environment.
 
-In the later case, you can then build the web-plm docker image with this command:
+In the later case, you can then build the webPLM docker image with this command:
 
 ```
 ./make.sh --bin /path/to/binaries

@@ -15,7 +15,7 @@ services:
       - "15672:15672"
     cpu_shares: 1024
   plm:
-    image: buggleinc/webplm:2.0-rc3-newrelic
+    image: buggleinc/webplm:2.0-rc4-newrelic
     volumes:
       - "~/webPLM/PLM-data:/root/.plm"
       - "~/webPLM/logs:/app/webplm/logs"
@@ -27,6 +27,9 @@ services:
       PLM_EXECUTION_MODE: "TRIBUNAL"
       MESSAGEQUEUE_ADDR: "messagequeue"
       MESSAGEQUEUE_PORT: "5672"
+      PLMACCOUNTS_ACCESS_TOKEN_URL:
+      PLMACCOUNTS_API_URL:
+      PLMACCOUNTS_AUTHORIZATION_ENDPOINT_URL:
       PLM_OAUTH_REDIRECT_URL:
       PLM_FACEBOOK_OAUTH_REDIRECT_URL:
       PLM_PLMACCOUNTS_OAUTH_REDIRECT_URL:
@@ -40,20 +43,26 @@ services:
       - messagequeue
     cpu_shares: 2048
   accounts:
-    image: plm-accounts:1.1
+    image: buggleinc/plm-accounts:2.0.0-rc1
     ports:
       - "9000:3000"
     environment:
       DB_ADDR: "db"
+      SESSION_SECRET:
+      MAILER_FROM:
+      MAILER_SERVICE_PROVIDER:
+      MAILER_EMAIL_ID:
+      MAILER_PASSWORD:
     links:
       - db
     cpu_shares: 512
   profiles:
-    image: plm-profiles:1.1
+    image: buggleinc/plm-profiles:2.0.0-rc1
     ports:
       - "8080:3000"
     environment:
       DB_ADDR: "db"
+      SESSION_SECRET:
     links:
       - db
     cpu_shares: 512

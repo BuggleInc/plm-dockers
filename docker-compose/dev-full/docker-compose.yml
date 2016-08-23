@@ -1,0 +1,70 @@
+version: '2'
+services:
+  messagequeue:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  plm:
+    image: buggleinc/webplm:2.0-rc4
+    volumes:
+      - "~/.plm:/root/.plm"
+      - "~/webPLM/logs:/app/webplm-dist/logs"
+    ports:
+      - "9000:9000"
+    links:
+      - accounts
+      - messagequeue
+      - profiles
+    environment:
+      GITHUB_ACCESS_TOKEN:
+      PLM_EXECUTION_MODE: "TRIBUNAL"
+      MESSAGEQUEUE_ADDR: "messagequeue"
+      MESSAGEQUEUE_PORT: "5672"
+      PLMACCOUNTS_ACCESS_TOKEN_URL: "http://accounts:8443/api/oauth2/token"
+      PLMACCOUNTS_API_URL: "http://accounts:8443/api/oauth2/users"
+      PLMACCOUNTS_AUTHORIZATION_ENDPOINT_URL: "http://localhost:3000/oauth2/dialog"
+      PLM_OAUTH_REDIRECT_URL:
+      PLM_FACEBOOK_OAUTH_REDIRECT_URL:
+      PLM_PLMACCOUNTS_OAUTH_REDIRECT_URL: "http://localhost:9000"
+      GITHUB_CLIENT_ID:
+      GITHUB_CLIENT_SECRET:
+      PLMACCOUNTS_CLIENT_ID:
+      PLMACCOUNTS_CLIENT_SECRET:
+      PLMPROFILES_URL: "http://profiles:8443"
+  judge:
+    image: buggleinc/plm-judge:2.0-rc2
+    links:
+      - messagequeue
+    environment:
+      MESSAGEQUEUE_ADDR: "messagequeue"
+      MESSAGEQUEUE_PORT: "5672"
+    restart: "always"
+  accounts:
+    image: buggleinc/plm-accounts:2.0.0-rc1
+    ports:
+      - "3000:8443"
+    links:
+      - db
+    environment:
+      DB_ADDR: "db"
+      SESSION_SECRET:
+      MAILER_FROM:
+      MAILER_SERVICE_PROVIDER:
+      MAILER_EMAIL_ID:
+      MAILER_PASSWORD:
+  profiles:
+    image: buggleinc/plm-profiles:2.0.0-rc1
+    ports:
+      - "8080:8443"
+    links:
+      - db
+    environment:
+      DB_ADDR: "db"
+      SESSION_SECRET:
+  db:
+    image: mongo
+    volumes:
+      - "~/mongodb/data:/data/db"
+    ports:
+      - "27017:27017"

@@ -7,12 +7,14 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    restart: "always"
     cpu_shares: 1024
   messagequeue:
     image: rabbitmq:3-management
     ports:
       - "5672:5672"
       - "15672:15672"
+    restart: "always"
     cpu_shares: 1024
   plm:
     image: buggleinc/webplm:2.0-rc4-newrelic
@@ -41,6 +43,7 @@ services:
       - accounts
       - profiles
       - messagequeue
+    restart: "always"
     cpu_shares: 2048
   accounts:
     image: buggleinc/plm-accounts:2.0.0-rc1
@@ -55,6 +58,7 @@ services:
       MAILER_PASSWORD:
     links:
       - db
+    restart: "always"
     cpu_shares: 512
   profiles:
     image: buggleinc/plm-profiles:2.0.0-rc1
@@ -65,6 +69,7 @@ services:
       SESSION_SECRET:
     links:
       - db
+    restart: "always"
     cpu_shares: 512
   db:
     image: mongo
@@ -72,4 +77,5 @@ services:
       - "~/mongodb/data:/data/db"
     ports:
       - "27017:27017"
+    restart: "always"
     cpu_shares: 1024

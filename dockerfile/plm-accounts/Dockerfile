@@ -17,6 +17,9 @@ USER mean
 ARG REPOSITORY=https://github.com/BuggleInc/PLM-accounts.git
 ARG BRANCH=master
 
+# CACHE_DATE is only used to stop caching instructions from this point
+ARG CACHE_DATE="not a date"
+
 RUN ["sh", "-c", "git clone --depth=1 --branch=$BRANCH $REPOSITORY /home/mean/plm-accounts"]
 
 WORKDIR /home/mean/plm-accounts

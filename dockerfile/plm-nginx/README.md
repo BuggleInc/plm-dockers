@@ -6,7 +6,8 @@ The NGINX configuration used is available [here](https://github.com/BuggleInc/PL
 To build the custom NGINX docker image, use the following command:
 
 ```
-docker build -t <name of your image> .
+docker build --build-arg CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S)
+             -t <name of your image> .
 ```
 
 Then, you can use the following command line to run the container:

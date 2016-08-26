@@ -11,6 +11,9 @@ RUN ["mkdir", "/app"]
 
 WORKDIR /app
 
+# CACHE_DATE is only used to stop caching instructions from this point
+ARG CACHE_DATE="not a date"
+
 RUN ["git", "clone", "--depth=1", "https://github.com/BuggleInc/PLM-nginx.git", "/app/PLM-nginx"]
 
 RUN ["cp", "/app/PLM-nginx/nginx.conf", "/etc/nginx/nginx.conf"]

@@ -30,6 +30,10 @@ ENV PATH $PATH:/activator-1.3.5-minimal
 # Get sources
 ARG REPOSITORY
 ARG BRANCH=master
+
+# CACHE_DATE is only used to stop caching instructions from this point
+ARG CACHE_DATE="not a date"
+
 RUN ["sh", "-c", "git clone --depth=1 --branch=$BRANCH https://$REPOSITORY /app"]
 
 # Volume to cache dependencies

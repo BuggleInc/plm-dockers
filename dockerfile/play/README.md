@@ -11,6 +11,7 @@ You can build this image using the following command:
 ```
 docker build --build-arg REPOSITORY=<git repository to clone>
              --build-arg BRANCH=<name of the branch to checkout>
+             --build-arg CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S)
              -t <name of your image> .
 ```
 

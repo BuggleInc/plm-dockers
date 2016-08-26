@@ -17,7 +17,7 @@ services:
     restart: "always"
     cpu_shares: 1024
   plm:
-    image: buggleinc/webplm:2.0-rc4-newrelic
+    image: buggleinc/webplm:2.0-rc5-newrelic
     volumes:
       - "~/webPLM/PLM-data:/root/.plm"
       - "~/webPLM/logs:/app/webplm/logs"
@@ -46,7 +46,7 @@ services:
     restart: "always"
     cpu_shares: 2048
   accounts:
-    image: buggleinc/plm-accounts:2.0.0-rc1
+    image: buggleinc/plm-accounts:2.0.0-rc2
     ports:
       - "9000:8443"
     environment:
@@ -61,7 +61,7 @@ services:
     restart: "always"
     cpu_shares: 512
   profiles:
-    image: buggleinc/plm-profiles:2.0.0-rc1
+    image: buggleinc/plm-profiles:2.0.0-rc2
     ports:
       - "8080:8443"
     environment:

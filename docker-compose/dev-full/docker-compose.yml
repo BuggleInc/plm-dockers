@@ -6,7 +6,7 @@ services:
       - "5672:5672"
       - "15672:15672"
   plm:
-    image: buggleinc/webplm:2.0-rc4
+    image: buggleinc/webplm:2.0-rc5
     volumes:
       - "~/.plm:/root/.plm"
       - "~/webPLM/logs:/app/webplm-dist/logs"
@@ -41,7 +41,7 @@ services:
       MESSAGEQUEUE_PORT: "5672"
     restart: "always"
   accounts:
-    image: buggleinc/plm-accounts:2.0.0-rc1
+    image: buggleinc/plm-accounts:2.0.0-rc2
     ports:
       - "3000:8443"
     links:
@@ -54,7 +54,7 @@ services:
       MAILER_EMAIL_ID:
       MAILER_PASSWORD:
   profiles:
-    image: buggleinc/plm-profiles:2.0.0-rc1
+    image: buggleinc/plm-profiles:2.0.0-rc2
     ports:
       - "8080:8443"
     links:

@@ -6,7 +6,7 @@ services:
       - "5672:5672"
       - "15672:15672"
   plm:
-    image: buggleinc/webplm:2.0-rc5
+    image: buggleinc/webplm:2.0.0-rc5
     volumes:
       - "~/.plm:/root/.plm"
       - "~/webPLM/logs:/app/webplm-dist/logs"

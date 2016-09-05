@@ -17,7 +17,7 @@ services:
     restart: "always"
     cpu_shares: 1024
   plm:
-    image: buggleinc/webplm:2.0.0-rc7-newrelic
+    image: buggleinc/webplm:2.0.0-newrelic
     command: [-J-Xmx8g, -J-Xms8g]
     volumes:
       - "~/webPLM/PLM-data:/root/.plm"

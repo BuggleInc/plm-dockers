@@ -118,7 +118,7 @@ fi
 
 echo "Binaries of PLM-judge are available in $DIR/target/"
 
-docker build -t "$DOCKER_IMAGE_FULLNAME" .
+docker build --build-arg VERSION="$ARG_VERSION" -t "$DOCKER_IMAGE_FULLNAME" .
 
 if [ $? -eq 1 ]; then
     echo "An error occurred while generating the docker image to run the project."

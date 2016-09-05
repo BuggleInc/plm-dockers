@@ -30,7 +30,7 @@ eval set -- "$TEMP"
 
 ARG_REPOSITORY="github.com/BuggleInc/PLM-judge.git"
 ARG_BRANCH="master"
-ARG_NAME="plm-judge"
+ARG_NAME="buggleinc/plm-judge"
 ARG_VERSION=""
 ARG_NO_CACHE=false
 ARG_CLEAN=false
@@ -98,7 +98,7 @@ else
                  --build-arg "BRANCH=$ARG_BRANCH" \
                  "--no-cache=$ARG_NO_CACHE" \
                  -t play-judge \
-                 github.com/BuggleInc/plm-dockers.git#update:dockerfile/play
+                 github.com/BuggleInc/plm-dockers.git#master:dockerfile/play
 
     if [ $? -eq 1 ]; then
         echo "An error occurred while generating the docker image to build the project."

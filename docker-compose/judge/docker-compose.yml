@@ -1,7 +1,7 @@
 version: '2'
 services:
   judge:
-    image: buggleinc/plm-judge:2.0-rc3
+    image: buggleinc/plm-judge:2.0.0-rc4
     environment:
       MESSAGEQUEUE_ADDR:
       MESSAGEQUEUE_PORT:

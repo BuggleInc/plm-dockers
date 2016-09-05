@@ -6,7 +6,7 @@ services:
       - "5672:5672"
       - "15672:15672"
   plm:
-    image: buggleinc/webplm:2.0.0-rc6
+    image: buggleinc/webplm:2.0.0-rc7
     volumes:
       - "~/.plm:/root/.plm"
       - "~/webPLM/logs:/app/webplm-dist/logs"
@@ -33,7 +33,7 @@ services:
       PLMACCOUNTS_CLIENT_SECRET:
       PLMPROFILES_URL: "http://profiles:8443"
   judge:
-    image: buggleinc/plm-judge:2.0-rc3
+    image: buggleinc/plm-judge:2.0-rc4
     links:
       - messagequeue
     environment:

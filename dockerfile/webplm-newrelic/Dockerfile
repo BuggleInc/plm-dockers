@@ -1,6 +1,7 @@
-FROM buggleinc/webplm:2.0.0-rc5
+FROM buggleinc/webplm:2.0.0-rc6
 MAINTAINER Gerald Oster <oster@loria.fr>
 
 VOLUME /app/webplm/newrelic
 
-CMD ["bin/web-plm", "-Dhttps.port=9443", "-J-Xmx8192m", "-J-Xms2048m", "-J-javaagent:newrelic/newrelic.jar"]
+ENTRYPOINT ["bin/web-plm", "-Dhttps.port=9443", "-J-javaagent:newrelic/newrelic.jar"]
+CMD []

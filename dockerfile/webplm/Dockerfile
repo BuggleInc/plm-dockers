@@ -26,4 +26,5 @@ COPY ["/target/universal/stage", "/app/webplm"]
 
 WORKDIR /app/webplm
 EXPOSE 9000 9443
-CMD ["bin/web-plm", "-Dhttps.port=9443", "-J-Xmx8192m", "-J-Xms2048m"]
+ENTRYPOINT ["bin/web-plm", "-Dhttps.port=9443"]
+CMD []

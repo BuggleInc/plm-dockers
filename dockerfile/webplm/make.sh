@@ -30,7 +30,7 @@ eval set -- "$TEMP"
 
 ARG_REPOSITORY="github.com/BuggleInc/webplm.git"
 ARG_BRANCH="master"
-ARG_NAME="webplm"
+ARG_NAME="buggleinc/webplm"
 ARG_VERSION=""
 ARG_NO_CACHE=false
 ARG_CLEAN=false

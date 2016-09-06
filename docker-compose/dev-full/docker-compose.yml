@@ -54,7 +54,7 @@ services:
       MAILER_EMAIL_ID:
       MAILER_PASSWORD:
   profiles:
-    image: buggleinc/plm-profiles:2.0.0-rc3
+    image: buggleinc/plm-profiles:2.0.0-rc4
     ports:
       - "8080:8443"
     links:
@@ -62,6 +62,8 @@ services:
     environment:
       DB_ADDR: "db"
       SESSION_SECRET:
+      API_ID:
+      API_SECRET:
   db:
     image: mongo
     volumes:

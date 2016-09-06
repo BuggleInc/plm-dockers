@@ -62,12 +62,14 @@ services:
     restart: "always"
     cpu_shares: 512
   profiles:
-    image: buggleinc/plm-profiles:2.0.0-rc3
+    image: buggleinc/plm-profiles:2.0.0-rc4
     ports:
       - "8080:8443"
     environment:
       DB_ADDR: "db"
       SESSION_SECRET:
+      API_ID:
+      API_SECRET:
     links:
       - db
     restart: "always"

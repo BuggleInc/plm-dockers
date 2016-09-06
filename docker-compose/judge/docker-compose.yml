@@ -6,5 +6,5 @@ services:
       MESSAGEQUEUE_ADDR:
       MESSAGEQUEUE_PORT:
     restart: "always"
-    mem_limit: "512M"
-    memswap_limit: "768M"
+    mem_limit: "4G"
+    command: ["java", "-jar", "PLM-judge.jar", "-Xmx1024m", "-Xms1024m"]

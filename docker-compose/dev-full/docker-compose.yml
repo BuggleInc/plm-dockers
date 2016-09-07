@@ -33,7 +33,7 @@ services:
       PLMACCOUNTS_CLIENT_SECRET:
       PLMPROFILES_URL: "http://profiles:8443"
   judge:
-    image: buggleinc/plm-judge:2.0.1
+    image: buggleinc/plm-judge:2.0.2
     links:
       - messagequeue
     environment:

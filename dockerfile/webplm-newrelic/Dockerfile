@@ -1,4 +1,4 @@
-FROM buggleinc/webplm:2.0.1
+FROM buggleinc/webplm:2.0.3
 MAINTAINER Gerald Oster <oster@loria.fr>
 
 VOLUME /app/webplm/newrelic

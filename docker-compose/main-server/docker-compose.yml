@@ -10,14 +10,14 @@ services:
     restart: "always"
     cpu_shares: 1024
   messagequeue:
-    image: rabbitmq:3-management
+    image: buggleinc/rabbitmq
     ports:
       - "5672:5672"
-      - "15672:15672"
+      - "15672:15674"
     restart: "always"
     cpu_shares: 1024
   plm:
-    image: buggleinc/webplm:2.0.3-newrelic
+    image: buggleinc/webplm:2.1.0-newrelic
     command: [-J-Xmx8g, -J-Xms8g]
     volumes:
       - "~/webPLM/PLM-data:/root/.plm"

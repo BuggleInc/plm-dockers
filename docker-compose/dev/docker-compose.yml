@@ -7,7 +7,7 @@ services:
       - "15672:15672"
       - "15674:15674"
   plm:
-    image: buggleinc/webplm:2.1.0
+    image: buggleinc/webplm:2.0.3
     volumes:
       - "~/.plm:/root/.plm"
       - "~/webPLM/logs:/app/webplm-dist/logs"
@@ -22,7 +22,7 @@ services:
       MESSAGEQUEUE_ADDR: "messagequeue"
       MESSAGEQUEUE_PORT: "5672"
   judge:
-    image: matthieunicolas/plm-judge:2.1.0
+    image: matthieunicolas/plm-judge:2.0.3
     links:
       - messagequeue
     environment:

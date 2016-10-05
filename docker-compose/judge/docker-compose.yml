@@ -1,7 +1,7 @@
 version: '2'
 services:
   judge:
-    image: matthieunicolas/plm-judge:2.1.0
+    image: matthieunicolas/plm-judge:2.1.1
     environment:
       MESSAGEQUEUE_ADDR:
       MESSAGEQUEUE_PORT:

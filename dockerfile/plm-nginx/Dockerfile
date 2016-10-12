@@ -16,7 +16,9 @@ ARG CACHE_DATE="not a date"
 
 RUN ["git", "clone", "--depth=1", "https://github.com/BuggleInc/PLM-nginx.git", "/app/PLM-nginx"]
 
-RUN ["cp", "/app/PLM-nginx/nginx.conf", "/etc/nginx/nginx.conf"]
+# CONFIG allows to specify which configuration we want to retrieve
+ARG CONFIG="tncy"
+RUN ["sh", "-c",  "cp /app/PLM-nginx/$CONFIG/nginx.conf /etc/nginx/nginx.conf"]
 
 RUN ["mkdir", "-p", "/etc/nginx/ssl"]
 

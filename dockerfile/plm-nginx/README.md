@@ -7,6 +7,7 @@ To build the custom NGINX docker image, use the following command:
 
 ```
 docker build --build-arg CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S)
+             --build-arg CONFIG=tncy
              -t <name of your image> .
 ```
 
@@ -18,6 +19,4 @@ docker run -p 80:80
            -d <name of your image>
 ```
 
-The volume should contain two SSL certificates and the corresponding keys:
-- *webPLM.crt* and *webPLM.key*
-- *plm-accounts.crt* and *plm-accounts.key*
+The volume should contain the SSL certificates and the corresponding keys required by the configuration used.

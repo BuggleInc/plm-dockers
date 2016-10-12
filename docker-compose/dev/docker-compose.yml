@@ -1,5 +1,12 @@
 version: '2'
 services:
+  nginx:
+    image: buggleinc/plm-nginx:1.1.0-dev
+    ports:
+      - "80:80"
+    links:
+      - plm
+      - messagequeue
   messagequeue:
     image: buggleinc/rabbitmq
     ports:
@@ -7,7 +14,7 @@ services:
       - "15672:15672"
       - "15674:15674"
   plm:
-    image: buggleinc/webplm:2.0.3
+    image: buggleinc/webplm:2.1.1
     volumes:
       - "~/.plm:/root/.plm"
       - "~/webPLM/logs:/app/webplm-dist/logs"
@@ -22,7 +29,7 @@ services:
       MESSAGEQUEUE_ADDR: "messagequeue"
       MESSAGEQUEUE_PORT: "5672"
   judge:
-    image: matthieunicolas/plm-judge:2.0.3
+    image: matthieunicolas/plm-judge:2.1.1
     links:
       - messagequeue
     environment:

@@ -1,7 +1,7 @@
 version: '2'
 services:
   nginx:
-    image: buggleinc/plm-nginx:1.0
+    image: buggleinc/plm-nginx:1.1.0-tncy
     volumes:
       - "~/webPLM/ssl:/etc/nginx/ssl"
     ports:

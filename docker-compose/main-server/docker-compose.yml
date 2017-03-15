@@ -17,12 +17,13 @@ services:
     restart: "always"
     cpu_shares: 1024
   plm:
-    image: buggleinc/webplm:2.1.1-newrelic
-    command: [-J-Xmx8g, -J-Xms8g]
+    image: buggleinc/webplm:2.1.1
+    command: [-J-Xmx8g, -J-Xms8g, -J-javaagent:newrelic/newrelic.jar, -J-javaagent:/app/webplm/plumbr/plumbr.jar]
     volumes:
       - "~/webPLM/PLM-data:/root/.plm"
       - "~/webPLM/logs:/app/webplm/logs"
       - "~/webPLM/newrelic:/app/webplm/newrelic"
+      - "~/webPLM/plumbr:/app/webplm/plumbr"
     ports:
       - "9443:9443"
     environment:

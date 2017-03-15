@@ -7,4 +7,6 @@ services:
       MESSAGEQUEUE_PORT:
     restart: "always"
     mem_limit: "4G"
-    command: ["java", "-jar", "PLM-judge.jar", "-Xmx1024m", "-Xms1024m"]
+    command: ["java", "-Xmx1024m", "-Xms1024m", "-javaagent:/app/judge/plumbr/plumbr.jar", "-jar", "PLM-judge.jar"]
+    volumes:
+      - "~/webPLM/plumbr:/app/judge/plumbr"

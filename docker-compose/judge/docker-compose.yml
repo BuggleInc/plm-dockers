@@ -7,7 +7,6 @@ services:
       MESSAGEQUEUE_PORT:
     restart: "always"
     mem_limit: "4G"
-    command: ["java", "-Xmx1024m", "-Xms1024m", "-javaagent:/app/judge/plumbr/plumbr.jar", "-Dpython.cachedir=/app/judge/cachedir", "-jar", "PLM-judge.jar"]
+    command: ["java", "-Xmx1024m", "-Xms1024m", "-Dpython.cachedir=/app/judge/cachedir", "-jar", "PLM-judge.jar"]
     volumes:
-      - "~/webPLM/plumbr:/app/judge/plumbr"
       - "~/webPLM/cachedir:/app/judge/cachedir"

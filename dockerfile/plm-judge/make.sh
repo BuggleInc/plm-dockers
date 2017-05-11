@@ -80,15 +80,22 @@ else
 fi
 
 if [ -n "$ARG_BIN" ]; then
+	
+    PROVIDED_BIN_FILENAME=${ARG_BIN##*/}
 
-    # We already have the binaries
-    cp -r "$ARG_BIN" "$DIR/"
+    if [ "$ARG_BIN" != "$DIR/target/$PROVIDED_BIN_FILENAME" ]; then
+		# We have to copy/rename the provided binary file
+		
+ 	    mkdir -p target/
+        cp -r "$ARG_BIN" "$DIR/target/PLM-judge-assembly-$ARG_VERSION.jar"
 
-    if [ $? -eq 1 ]; then
-        echo "An error occurred while copying the binaries."
-        terminating
-    fi
+        if [ $? -eq 1 ]; then
+            echo "An error occurred while copying the binaries."
+            terminating
+        fi
 
+	fi
+	
 else
 
     echo "Generating docker image to build the project available here: $ARG_REPOSITORY"

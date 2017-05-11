@@ -36,3 +36,6 @@ services:
       MESSAGEQUEUE_ADDR: "messagequeue"
       MESSAGEQUEUE_PORT: "5672"
     restart: "always"
+    command: ["java", "-Dpython.cachedir=/app/judge/cachedir", "-jar", "PLM-judge.jar"]
+    volumes:
+      - "~/webPLM/cachedir:/app/judge/cachedir"

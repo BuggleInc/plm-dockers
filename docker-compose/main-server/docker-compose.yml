@@ -13,7 +13,7 @@ services:
     image: buggleinc/rabbitmq
     ports:
       - "5672:5672"
-      - "15672:15674"
+      - "15674:15674"
     restart: "always"
     cpu_shares: 1024
   plm:
